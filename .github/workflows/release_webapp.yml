@@ -28,7 +28,7 @@ jobs:
         run: |
           curl -H "Authorization: Bearer ${{ secrets.APP_AUTO_RELEASE }}" \
           -H "Accept: application/vnd.github+json" \
-          https://api.github.com/repos/FLECS-Technologies/flecs-webapp-dummy
+          https://api.github.com/repos/FLECS-Technologies/flecs-webapp-dummy/releases
 
 
       - name: create release for webapp
