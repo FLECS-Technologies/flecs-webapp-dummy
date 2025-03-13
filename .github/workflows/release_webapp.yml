@@ -13,6 +13,12 @@ jobs:
   create_release:
     runs-on: ubuntu-latest
     steps:
+      - name: check token
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.APP_AUTO_RELEASE }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/FLECS-Technologies
+
       - name: create release for webapp
         run: |
             curl -L --fail-with-body \
