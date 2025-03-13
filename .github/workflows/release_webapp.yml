@@ -9,6 +9,17 @@ on:
         required: false
         type: string
         default: main
+  workflow_dispatch:
+    inputs:
+      env_webapp_version:
+        description: manual input of webapp version
+        required: true
+        type: string
+      env_webapp_branch:
+        description: manual input of webapp branch
+        required: false
+        type: string
+        default: main
 jobs:
   create_release:
     runs-on: ubuntu-latest
@@ -17,7 +28,7 @@ jobs:
         run: |
           curl -H "Authorization: Bearer ${{ secrets.APP_AUTO_RELEASE }}" \
             -H "Accept: application/vnd.github+json" \
-            https://api.github.com/FLECS-Technologies
+            https://api.github.com/user
 
       - name: create release for webapp
         run: |
