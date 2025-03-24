@@ -9,6 +9,11 @@ on:
         required: false
         type: string
         default: main
+    secrets:
+      app_id:
+        required: true
+      private_key:
+        required: true
   workflow_dispatch:
     inputs:
       env_webapp_version:
