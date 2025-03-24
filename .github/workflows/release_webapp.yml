@@ -29,7 +29,7 @@ jobs:
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ secrets.FLECS_WORKFLOW_AUTOMATION_CLIENT_ID }}
-          private-key: ${{ secrets.FLECS_WORKFLOW_AUTOMA
+          private-key: ${{ secrets.FLECS_WORKFLOW_AUTOMATION_KEY }}
       - name: Create webapp release
         uses: octokit/request-action@v2.x
         with:
