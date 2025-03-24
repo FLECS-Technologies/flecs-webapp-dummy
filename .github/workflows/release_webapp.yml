@@ -35,6 +35,8 @@ jobs:
         with:
           app-id: ${{ secrets.FLECS_WORKFLOW_AUTOMATION_CLIENT_ID }}
           private-key: ${{ secrets.FLECS_WORKFLOW_AUTOMATION_KEY }}
+          owner: FLECS-Technologies
+          repositories: flecs-webapp-dummy
       - name: Create webapp release
         uses: octokit/request-action@v2.x
         with:
