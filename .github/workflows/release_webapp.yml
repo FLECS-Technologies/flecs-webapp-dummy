@@ -56,3 +56,22 @@ jobs:
             }
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+      - name: Check webapp release
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          OWNER: FLECS-Technologies
+          REPO: flecs-webapp-dummy
+          TAG: ${{ inputs.env_webapp_version }}
+        run: |
+          for i in {1..10}; do
+            echo "Checking if release $TAG exists"
+            RELEASE_EXISTS=$(gh api repos/$OWNER/$REPO/releases --jq ".[] | select(.tag_name == \"$TAG\") | .id")
+            if [ "$RELEASE_EXISTS" -gt 0 ]; then
+              echo "Release $TAG found!"
+              exit 0
+            fi
+            echo "Release not found, retrying in 5s"
+            sleep 5
+          done
+          echo "Timed out waiting for release $TAG."
+          exit 1
