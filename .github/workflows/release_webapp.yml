@@ -9,22 +9,6 @@ on:
         required: false
         type: string
         default: main
-    secrets:
-      app_id:
-        required: true
-      private_key:
-        required: true
-  workflow_dispatch:
-    inputs:
-      env_webapp_version:
-        description: manual input of webapp version
-        required: true
-        type: string
-      env_webapp_branch:
-        description: manual input of webapp branch
-        required: false
-        type: string
-        default: main
       should_fail:
         description: simulate failure of workflow
         required: false
@@ -33,6 +17,11 @@ on:
         description: simulation timeout of workflow
         required: false
         type: string
+    secrets:
+      app_id:
+        required: true
+      private_key:
+        required: true
 jobs:
   create_release:
     runs-on: ubuntu-latest
