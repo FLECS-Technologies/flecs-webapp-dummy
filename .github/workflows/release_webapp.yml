@@ -25,6 +25,14 @@ on:
         required: false
         type: string
         default: main
+      should_fail:
+        description: simulate failure of workflow
+        required: false
+        type: string
+      should_timeout:
+        description: simulation timeout of workflow
+        required: false
+        type: string
 jobs:
   create_release:
     runs-on: ubuntu-latest
@@ -74,4 +82,17 @@ jobs:
             sleep 5
           done
           echo "Timed out waiting for release $TAG."
+          exit 1
+      - name: Simulate timeout
+        if: inputs.should_timeout == 'true'
+        run: |
+          echo "Simulating timeout..."
+          while true; do
+            echo "Hanging indefinitely..."
+            sleep 60
+          done
+      - name: Simulate failure
+        if: inputs.should_fail == 'true'
+        run: |
+          echo "Simulating failure..."
           exit 1
