@@ -43,17 +43,20 @@ jobs:
       - name: Create webapp release
         uses: octokit/request-action@v2.x
         with:
-          route: POST /repos/FLECS-Technologies/flecs-webapp-dummy/releases
-          mediaType: '{"format": "json"}'
-          tag_name: ${{ inputs.env_webapp_version }}
-          target_commitish: ${{ inputs.env_webapp_branch }}
-          name: ${{ inputs.env_webapp_version }}
-          body: Automated dummy release
-          draft: false
-          prerelease: false
-          message: automated tag creation
-          generate_release_notes: true
-          make_latest: "false"
+          route: POST /repos/{owner}/{app}/releases
+          owner: FLECS-Technologies
+          app: flecs-webapp-dummy
+          data: >
+            {
+              "tag_name": "${{ inputs.env_webapp_version }}",
+              "target_commitish": ${{ inputs.env_webapp_branch }},
+              "name":"${{ inputs.env_webapp_version }}",
+              "body":"Automated dummy release",
+              "draft": false,
+              "prerelease": false,
+              "message": "automated tag creation",
+              "generate_release_notes":true,
+            }
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
       - name: Check webapp release
