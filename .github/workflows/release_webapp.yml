@@ -23,6 +23,11 @@ on:
       private_key:
         required: true
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+     - name: Fake build job
+       run: echo "This is just a test for webapp dummy"
   create_release:
     runs-on: ubuntu-latest
     steps:
@@ -37,9 +42,9 @@ jobs:
       - name: Create webapp release
         uses: octokit/request-action@v2.x
         with:
-          route: POST /repos/{owner}/{app}/releases
+          route: POST /repos/{owner}/{repo}/releases
           owner: FLECS-Technologies
-          app: flecs-webapp-dummy
+          repo: flecs-webapp-dummy
           data: >
             {
               "tag_name": "${{ inputs.env_webapp_version }}",
@@ -50,6 +55,7 @@ jobs:
               "prerelease": false,
               "message": "automated tag creation",
               "generate_release_notes":true,
+              "make_latest": false,
             }
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
