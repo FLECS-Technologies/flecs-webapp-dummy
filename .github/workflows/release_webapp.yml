@@ -44,7 +44,7 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: POST /repos/FLECS-Technologies/flecs-webapp-dummy/releases
-          mediaType: '{"format:" "json"}'
+          mediaType: '{"format": "json"}'
           parameters: >
             {
               "tag_name": "${{ inputs.env_webapp_version }}",
