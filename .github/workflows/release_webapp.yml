@@ -42,9 +42,9 @@ jobs:
       - name: Create webapp release
         uses: octokit/request-action@v2.x
         with:
-          route: POST /repos/{owner}/{repo}/releases
+          route: POST /repos/{owner}/{app}/releases
           owner: FLECS-Technologies
-          repo: flecs-webapp-dummy
+          app: flecs-webapp-dummy
           data: >
             {
               "tag_name": "${{ inputs.env_webapp_version }}",
